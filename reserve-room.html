@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réserver une salle</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Réserver une salle</h1>
+
+    <p>
+      <a href="dashboard.html">⬅ Retour au dashboard</a>
+    </p>
+
+    <div class="card">
+      <div id="msg" style="margin: 10px 0;"></div>
+
+      <label>Capacité minimum (filtre)</label>
+      <input id="minCapacity" type="number" min="0" placeholder="Ex: 40" />
+
+      <label>Équipement (filtre)</label>
+      <select id="equipment">
+        <option value="">-- Aucun --</option>
+        <option value="projecteur">Projecteur</option>
+        <option value="micro">Micro</option>
+        <option value="ecran">Écran</option>
+        <option value="son">Son</option>
+      </select>
+
+      <label>Salle</label>
+      <select id="room">
+        <option value="">-- Choisir --</option>
+      </select>
+
+      <label>Date & heure début</label>
+      <input id="start" type="datetime-local" />
+
+      <label>Date & heure fin</label>
+      <input id="end" type="datetime-local" />
+
+      <button id="btnReserve" class="btn-primary" style="margin-top:14px;">
+        Réserver (mock)
+      </button>
+
+      <hr />
+
+      <h3 style="margin:0 0 10px 0;">Créneaux déjà réservés</h3>
+      <p class="small" style="margin-top:0;">
+        (Sprint 1 mock) : affichage des réservations existantes. Les conflits sont bloqués automatiquement.
+      </p>
+
+      <label>Afficher les réservations de</label>
+      <select id="roomView">
+        <option value="">Toutes les salles</option>
+      </select>
+
+      <div id="emptyRes" class="small" style="margin: 10px 0; color: var(--muted);"></div>
+
+      <table id="resTable" border="1" cellspacing="0" cellpadding="8"
+             style="width:100%; border-collapse: collapse; margin-top:10px;">
+        <thead>
+          <tr>
+            <th>Salle</th>
+            <th>Début</th>
+            <th>Fin</th>
+
+            <!-- ✅ NOUVEAU : colonne Événement -->
+            <th>Événement</th>
+
+            <th>Statut</th>
+            <th id="thCreatedBy">Créé par</th>
+          </tr>
+        </thead>
+        <tbody id="resBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+     requirePerm("RESERVE_ROOM"); requirePerm("RESERVE_ROOM");
+    const user = getUser();
+    const role = user?.role;
+    const allowed = (role === "organisateur" || role === "administrateur" || role === "coordonnateur");
+
+    if (!allowed) {
+      alert("Accès refusé : vous n’avez pas les droits pour réserver une salle.");
+      window.location.href = "dashboard.html";
+    }
+  </script>
+
+  <script src="js/reserve-room.js"></script>
+</body>
+</html>

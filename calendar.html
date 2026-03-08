@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendrier mensuel des salles</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .dow {
+      font-weight: 700;
+      color: #666;
+      text-align: center;
+    }
+
+    .day {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      min-height: 110px;
+      padding: 10px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .day.muted {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .num {
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .chip {
+      display: block;
+      margin: 6px 0;
+      padding: 6px 8px;
+      border-radius: 10px;
+      background: #f3f3f3;
+      font-size: 12px;
+    }
+
+    .panel {
+      margin-top: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .slots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .smallgray {
+      color: #888;
+      font-size: 12px;
+    }
+
+    .slot {
+      border-radius: 12px;
+      padding: 10px 12px;
+      border: 2px solid transparent;
+      font-size: 13px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .slot .t {
+      font-weight: 900;
+    }
+
+    .slot .meta {
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .slot.free {
+      border-color: #2e7d32;
+      background: #e8f5e9;
+    }
+
+    .slot.busy {
+      border-color: #c62828;
+      background: #ffebee;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-right: 8px;
+    }
+
+    .badge.free {
+      background: #c8e6c9;
+    }
+
+    .badge.busy {
+      background: #ffcdd2;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    select {
+      padding: 8px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Calendrier mensuel des salles</h1>
+
+    <div class="cal-header">
+      <button id="prev">← Mois précédent</button>
+      <h2 id="title"></h2>
+      <button id="next">Mois suivant →</button>
+    </div>
+
+    <div class="toolbar">
+      <label for="roomFilter">Filtrer par salle :</label>
+      <select id="roomFilter">
+        <option value="">Toutes les salles</option>
+        <option value="Salle A">Salle A</option>
+        <option value="Salle B">Salle B</option>
+        <option value="Salle C">Salle C</option>
+        <option value="Salle D">Salle D</option>
+        <option value="Salle E">Salle E</option>
+      </select>
+    </div>
+
+    <div id="dow" class="cal-grid"></div>
+    <div id="grid" class="cal-grid"></div>
+
+    <div id="dayPanel" class="panel" style="display: none;">
+      <div class="cal-header">
+        <h3 id="panelTitle">Jour</h3>
+        <button id="closePanel">Fermer</button>
+      </div>
+
+      <div id="slots" class="slots"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/calendar.js"></script>
+</body>
+</html>

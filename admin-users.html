@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des profils</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>Hôtel La Promenade</span>
+      </div>
+      <div class="small" id="welcome"></div>
+
+      <nav style="display:flex; flex-direction:column; gap:8px;">
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a class="active" href="admin-users.html">👤 Gestion des profils</a>
+      </nav>
+
+      <div style="margin-top:auto;">
+        <button class="btn-secondary" onclick="logout()">Déconnexion</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="title">Gestion des profils (Admin)</div>
+        <div class="right">
+          <span class="small" id="roleLine"></span>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:16px;">
+        <h3 style="margin:0 0 10px 0;">Ajouter un utilisateur</h3>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+          <input id="uName" class="input" placeholder="Nom complet" />
+          <input id="uEmail" class="input" placeholder="Email" />
+          <input id="uPassword" class="input" placeholder="Mot de passe" />
+          <select id="uRole" class="input">
+            <option value="organisateur">Organisateur</option>
+            <option value="administrateur">Administrateur</option>
+            <option value="coordonnateur">Coordonnateur</option>
+            <option value="comptabilite">Comptabilité</option>
+          </select>
+        </div>
+
+        <div style="margin-top:10px; display:flex; gap:10px;">
+          <button class="btn-primary" id="btnAddUser">➕ Ajouter</button>
+          <button class="btn-secondary" id="btnResetUsers">↩️ Reset comptes (demo)</button>
+          <div class="small" id="msgUser" style="align-self:center;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 10px 0;">Liste des utilisateurs</h3>
+
+        <table class="table" style="width:100%;">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Rôle</th>
+              <th>Actif</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="usersTbody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    requirePerm("ADMIN_USERS");
+    renderWelcome();
+
+    const user = getUser();
+    const roleLine = document.getElementById("roleLine");
+    if (roleLine && user) roleLine.textContent = `Rôle : ${user.role}`;
+  </script>
+  <script src="js/admin-users.js"></script>
+</body>
+</html>
