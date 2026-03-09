@@ -1,120 +1,141 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="brand">
-        <span class="brand-dot"></span>
-        <span>Hôtel La Promenade</span>
-      </div>
-      <div class="small" id="welcome"></div>
+<div class="layout">
+<aside class="sidebar">
+<div class="brand">
+<span class="brand-dot"></span>
+<span>Hôtel La Promenade</span>
+</div>
+<div class="small" id="welcome"></div>
+<nav class="sidebar-nav">
+<a class="active" href="dashboard.html">🏠 Dashboard</a>
+<a id="linkCreateEvent" href="create-event.html">➕ Créer événement</a>
+<a id="linkEventsList" href="events-list.html">📋 Mes événements</a>
+<a id="linkReserveRoom" href="reserve-room.html">🏛️ Réserver une salle</a>
+<a id="linkCalendar" href="calendar.html">🗓️ Calendrier</a>
+<a id="linkHistory" href="history.html">🧾 Historique</a>
+<a id="linkAdminUsers" href="admin-users.html">👤 Gestion des profils</a>
+<a id="linkBilling" href="billing.html">💳 Facturation</a>
+</nav>
+<div style="margin-top:auto;">
+<button class="btn-secondary" onclick="logout()">Déconnexion</button>
+</div>
+</aside>
+<main class="main">
+<div class="topbar">
+<div class="title">Dashboard</div>
+<div class="right">
+<span class="small" id="roleLine"></span>
+</div>
+</div>
+<div class="grid">
+<div class="card" id="cardCreateEvent">
+<h3 style="margin:0 0 10px 0;">Événements</h3>
+<p class="small">Créer et gérer tes événements.</p>
+<button class="btn-primary" onclick="location.href='create-event.html'">
 
-      <nav class="sidebar-nav">
-        <a class="active" href="dashboard.html">🏠 Dashboard</a>
-        <a id="linkCreateEvent" href="create-event.html">➕ Créer événement</a>
-        <a id="linkEventsList" href="events-list.html">📋 Mes événements</a>
-        <a id="linkReserveRoom" href="reserve-room.html">🏛️ Réserver une salle</a>
-        <a id="linkCalendar" href="calendar.html">🗓️ Calendrier</a>
-        <a href="history.html">🧾 Historique</a>
-        <a id="linkAdminUsers" href="admin-users.html">👤 Gestion des profils</a>
-        <a id="linkBilling" href="billing.html">💳 Facturation</a>
-      </nav>
-
-      <div style="margin-top:auto;">
-        <button class="btn-secondary" onclick="logout()">Déconnexion</button>
-      </div>
-    </aside>
-
-    <main class="main">
-      <div class="topbar">
-        <div class="title">Dashboard</div>
-        <div class="right">
-          <span class="small" id="roleLine"></span>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="card" id="cardCreateEvent">
-          <h3 style="margin:0 0 10px 0;">Événements</h3>
-          <p class="small">Créer et gérer tes événements.</p>
-          <button class="btn-primary" onclick="location.href='create-event.html'">
             Créer un événement
-          </button>
-        </div>
+</button>
+</div>
+<div class="card" id="cardReserveRoom">
+<h3 style="margin:0 0 10px 0;">Salles</h3>
+<p class="small">Voir les disponibilités et réserver.</p>
+<button class="btn-primary" onclick="location.href='reserve-room.html'">
 
-        <div class="card" id="cardReserveRoom">
-          <h3 style="margin:0 0 10px 0;">Salles</h3>
-          <p class="small">Voir les disponibilités et réserver.</p>
-          <button class="btn-primary" onclick="location.href='reserve-room.html'">
             Réserver une salle
-          </button>
-        </div>
+</button>
+</div>
+<div class="card" id="cardEventsList">
+<h3 style="margin:0 0 10px 0;">Mes données</h3>
+<p class="small">Consulter la liste de tes événements.</p>
+<button class="btn-primary" onclick="location.href='events-list.html'">
 
-        <div class="card" id="cardEventsList">
-          <h3 style="margin:0 0 10px 0;">Mes données</h3>
-          <p class="small">Consulter la liste de tes événements.</p>
-          <button class="btn-primary" onclick="location.href='events-list.html'">
             Voir mes événements
-          </button>
-        </div>
+</button>
+</div>
+<div class="card" id="cardCalendar">
+<h3 style="margin:0 0 10px 0;">Calendrier</h3>
+<p class="small">Voir événements + réservations par date.</p>
+<button class="btn-primary" onclick="location.href='calendar.html'">
 
-        <div class="card" id="cardCalendar">
-          <h3 style="margin:0 0 10px 0;">Calendrier</h3>
-          <p class="small">Voir événements + réservations par date.</p>
-          <button class="btn-primary" onclick="location.href='calendar.html'">
             Ouvrir le calendrier
-          </button>
-        </div>
+</button>
+</div>
+<div class="card" id="cardHistory">
+<h3 style="margin:0 0 10px 0;">Historique</h3>
+<p class="small">Voir toutes les actions réalisées.</p>
+<button class="btn-primary" onclick="location.href='history.html'">
 
-        <div class="card" id="cardAdminUsers">
-          <h3 style="margin:0 0 10px 0;">Administration</h3>
-          <p class="small">Ajouter / modifier / désactiver des profils.</p>
-          <button class="btn-primary" onclick="location.href='admin-users.html'">
+            Voir l’historique
+</button>
+</div>
+<div class="card" id="cardAdminUsers">
+<h3 style="margin:0 0 10px 0;">Administration</h3>
+<p class="small">Ajouter / modifier / désactiver des profils.</p>
+<button class="btn-primary" onclick="location.href='admin-users.html'">
+
             Gérer les profils
-          </button>
-        </div>
+</button>
+</div>
+<div class="card" id="cardBilling">
+<h3 style="margin:0 0 10px 0;">Facturation</h3>
+<p class="small">Gérer factures, paiements et statuts.</p>
+<button class="btn-primary" onclick="location.href='billing.html'">
 
-        <div class="card" id="cardBilling">
-          <h3 style="margin:0 0 10px 0;">Facturation</h3>
-          <p class="small">Gérer factures, paiements et statuts.</p>
-          <button class="btn-primary" onclick="location.href='billing.html'">
             Ouvrir facturation
-          </button>
-        </div>
-      </div>
-    </main>
-  </div>
+</button>
+</div>
+</div>
+</main>
+</div>
+<script src="app.js"></script>
+<script>
 
-  <script src="app.js"></script>
-  <script>
     requireAuth();
+
     renderWelcome();
 
     const user = getUser();
+
     const roleLine = document.getElementById("roleLine");
+
     if (roleLine && user) {
+
       roleLine.textContent = `Rôle : ${user.role}`;
+
     }
 
     hideIfNoPerm("CREATE_EVENT", "#cardCreateEvent");
+
     hideIfNoPerm("RESERVE_ROOM", "#cardReserveRoom");
+
     hideIfNoPerm("VIEW_MY_EVENTS", "#cardEventsList");
+
     hideIfNoPerm("VIEW_CALENDAR", "#cardCalendar");
+
     hideIfNoPerm("ADMIN_USERS", "#cardAdminUsers");
+
     hideIfNoPerm("BILLING", "#cardBilling");
 
     hideIfNoPerm("CREATE_EVENT", "#linkCreateEvent");
+
     hideIfNoPerm("RESERVE_ROOM", "#linkReserveRoom");
+
     hideIfNoPerm("VIEW_MY_EVENTS", "#linkEventsList");
+
     hideIfNoPerm("VIEW_CALENDAR", "#linkCalendar");
+
     hideIfNoPerm("ADMIN_USERS", "#linkAdminUsers");
+
     hideIfNoPerm("BILLING", "#linkBilling");
-  </script>
+</script>
 </body>
 </html>
+ 
