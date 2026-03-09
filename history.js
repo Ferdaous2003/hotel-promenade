@@ -30,9 +30,29 @@ function renderHistory() {
 
   const history = JSON.parse(localStorage.getItem("hp_history") || "[]");
 
+  let visibleHistory = [];
+
+  // Admin voit tout
+
+  if (user.role === "administrateur") {
+
+    visibleHistory = history;
+
+  } else {
+
+    // Chaque autre profil voit seulement SON historique
+
+    visibleHistory = history.filter((h) => {
+
+      return String(h.user || "").trim().toLowerCase() === String(user.full_name || "").trim().toLowerCase();
+
+    });
+
+  }
+
   tbody.innerHTML = "";
 
-  if (history.length === 0) {
+  if (visibleHistory.length === 0) {
 
     const tr = document.createElement("tr");
 
@@ -46,7 +66,7 @@ function renderHistory() {
 
   }
 
-  history.reverse().forEach((h) => {
+  visibleHistory.slice().reverse().forEach((h) => {
 
     const tr = document.createElement("tr");
 
