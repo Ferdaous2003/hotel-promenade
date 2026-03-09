@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Créer un événement</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -74,20 +74,20 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
   <script>
-      requirePerm("CREATE_EVENT");
+    requirePerm("CREATE_EVENT");
 
-    //  blocage par rôle (Sprint 1)
     const user = getUser();
     const role = user?.role;
     const allowed = (role === "organisateur" || role === "administrateur" || role === "coordonnateur");
+
     if (!allowed) {
       alert("Accès refusé : vous n’avez pas les droits pour créer/valider un événement.");
       window.location.href = "dashboard.html";
     }
   </script>
 
-  <script src="js/events.js"></script>
+  <script src="events.js"></script>
 </body>
 </html>
