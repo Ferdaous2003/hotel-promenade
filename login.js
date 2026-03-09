@@ -1,92 +1,28 @@
-// =====================
-// LOGIN (mock) - Sprint 1
-// =====================
+document.getElementById("btnLogin").addEventListener("click", function () {
 
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const btnLogin = document.getElementById("btnLogin");
-const errorDiv = document.getElementById("error");
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-// Comptes mock + rôles
-// IMPORTANT : les rôles doivent être EXACTEMENT les mêmes dans app.js
-const MOCK_USERS = [
-  {
-    email: "orga@test.com",
-    password: "1234",
-    full_name: "Organisateur Test",
-    role: "organisateur",
-  },
-  {
-    email: "admin@test.com",
-    password: "1234",
-    full_name: "Admin Test",
-    role: "administrateur",
-  },
-  {
-    email: "coord@test.com",
-    password: "1234",
-    full_name: "Coordonnateur Test",
-    role: "coordonnateur",
-  },
-  {
-    email: "compta@test.com",
-    password: "1234",
-    full_name: "Comptabilité Test",
-    role: "comptabilite",
-  },
-];
+  // utilisateurs test
+  const users = [
+    { email: "admin@test.com", password: "1234", role: "administrateur", full_name: "Admin" },
+    { email: "orga@test.com", password: "1234", role: "organisateur", full_name: "Organisateur" },
+    { email: "coord@test.com", password: "1234", role: "coordonnateur", full_name: "Coordonnateur" },
+    { email: "compta@test.com", password: "1234", role: "comptabilite", full_name: "Comptable" }
+  ];
 
-function showError(message) {
-  if (!errorDiv) return;
-  errorDiv.textContent = message;
-}
+  const user = users.find(u => u.email === email && u.password === password);
 
-function doLogin() {
-  const email = (emailInput?.value || "").trim().toLowerCase();
-  const password = (passwordInput?.value || "").trim();
+  if (user) {
 
-  showError("");
+    localStorage.setItem("user", JSON.stringify(user));
 
-  if (!email || !password) {
-    showError("Veuillez remplir l’email et le mot de passe.");
-    return;
+    window.location.href = "dashboard.html";
+
+  } else {
+
+    alert("Email ou mot de passe incorrect");
+
   }
 
-  const foundUser = MOCK_USERS.find(
-    (user) =>
-      user.email.toLowerCase() === email &&
-      user.password === password
-  );
-
-  if (!foundUser) {
-    showError("Email ou mot de passe incorrect.");
-    return;
-  }
-
-  const connectedUser = {
-    full_name: foundUser.full_name,
-    email: foundUser.email,
-    role: foundUser.role,
-  };
-
-  localStorage.setItem("user", JSON.stringify(connectedUser));
-
-  // Redirection simple vers le tableau de bord
-  window.location.href = "dashboard.html";
-}
-
-// Clic sur le bouton
-if (btnLogin) {
-  btnLogin.addEventListener("click", doLogin);
-}
-
-// Touche Entrée
-[emailInput, passwordInput].forEach((input) => {
-  if (input) {
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        doLogin();
-      }
-    });
-  }
 });
