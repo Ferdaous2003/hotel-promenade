@@ -1218,4 +1218,63 @@ body.login-page {
     overflow-x:auto !important;
     flex-wrap:nowrap !important;
   }
+
 }
+/* ================= MOBILE ================= */
+
+@media screen and (max-width: 768px) {
+
+.layout{
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+.sidebar{
+
+  width:100%;
+
+  position:relative;
+
+}
+
+.sidebar-nav{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+}
+
+.sidebar-nav a{
+
+  flex:1 1 45%;
+
+  text-align:center;
+
+}
+
+.main{
+
+  padding:10px;
+
+}
+
+.grid{
+
+  grid-template-columns:1fr;
+
+}
+
+.card{
+
+  width:100%;
+
+}
+
+}
+ 
