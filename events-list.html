@@ -1,55 +1,106 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mes événements</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+// js/history.js
 
-  <div class="container">
-    <h1>Mes événements</h1>
+function escapeHtml(v) {
 
-    <p>
-      <a href="dashboard.html">⬅ Retour au dashboard</a>
-    </p>
+  return String(v || "")
 
-    <div id="empty" style="color: gray; margin: 10px 0;"></div>
+    .replace(/&/g, "&amp;")
 
-    <table id="table" border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse: collapse;">
-      <thead>
-        <tr>
-          <th>Titre</th>
-          <th>Type</th>
-          <th>Début</th>
-          <th>Fin</th>
-          <th>Salle</th>
-          <th>Budget</th>
-          <th>Participants</th>
-          <th>Statut</th>
-          <th>Actions</th>
-          <th>Facture</th>
-        </tr>
-      </thead>
+    .replace(/</g, "&lt;")
 
-      <tbody id="tbody"></tbody>
-    </table>
+    .replace(/>/g, "&gt;");
 
-    <div style="margin-top:15px;">
-      <button class="btn-secondary" onclick="clearMyEvents()">
-        Supprimer tous MES événements (mock)
-      </button>
-    </div>
-  </div>
+}
 
-  <script src="app.js"></script>
+function renderHistory() {
 
-  <script>
-    requirePerm("VIEW_MY_EVENTS");
-  </script>
+  const tbody = document.getElementById("tbody");
 
-  <script src="events-list.js"></script>
+  if (!tbody) return;
 
-</body>
-</html>
+  const user = getUser();
+
+  if (!user) {
+
+    window.location.href = "login.html";
+
+    return;
+
+  }
+
+  const history = JSON.parse(localStorage.getItem("hp_history") || "[]");
+
+  const events = JSON.parse(localStorage.getItem("hp_events") || "[]");
+
+  let visibleHistory = [];
+
+  // ADMIN → voit tout
+
+  if (user.role === "administrateur") {
+
+    visibleHistory = history;
+
+  }
+
+  // AUTRES → voient seulement leurs événements
+
+  else {
+
+    const myEventIds = events
+
+      .filter(e => e.created_by === user.email)
+
+      .map(e => String(e.id));
+
+    visibleHistory = history.filter(h =>
+
+      myEventIds.includes(String(h.id))
+
+    );
+
+  }
+
+  tbody.innerHTML = "";
+
+  if (visibleHistory.length === 0) {
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML =
+
+      '<td colspan="6" style="color:gray;">Aucune action enregistrée.</td>';
+
+    tbody.appendChild(tr);
+
+    return;
+
+  }
+
+  visibleHistory.reverse().forEach(h => {
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+<td>${escapeHtml(h.date)}</td>
+<td>${escapeHtml(h.user)}</td>
+<td>${escapeHtml(h.role)}</td>
+<td>${escapeHtml(h.action)}</td>
+<td>${escapeHtml(h.title)}</td>
+<td>${escapeHtml(h.id)}</td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  requireAuth();
+
+  renderHistory();
+
+});
+ 
