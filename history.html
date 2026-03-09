@@ -4,46 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Historique</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="container">
     <h1>Historique des événements</h1>
-    <p><a href="dashboard.html">⬅ Retour au dashboard</a></p>
 
-    <!-- Debug (optionnel) -->
+    <p>
+      <a href="dashboard.html">⬅ Retour au dashboard</a>
+    </p>
+
+    <!-- Debug -->
     <p class="small" id="debug" style="color:gray;"></p>
 
     <table border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse:collapse;">
-     <thead>
-  <tr>
-    <th>Date</th>
-    <th>Utilisateur</th>
-    <th>Rôle</th>
-    <th>Action</th>
-    <th>Titre</th>
-    <th>ID</th>
-  </tr>
-</thead>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Utilisateur</th>
+          <th>Rôle</th>
+          <th>Action</th>
+          <th>Titre</th>
+          <th>ID</th>
+        </tr>
+      </thead>
+
       <tbody id="tbody"></tbody>
     </table>
 
     <div style="margin-top:15px;">
-      <button class="btn-secondary" onclick="localStorage.removeItem('hp_history'); location.reload();">
+      <button class="btn-secondary"
+        onclick="localStorage.removeItem('hp_history'); location.reload();">
         Vider l’historique (mock)
       </button>
     </div>
   </div>
 
-  <!--  ordre important -->
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
+
   <script>
     requireAuth();
 
-    // Debug : affiche si hp_history est vide ou non
     document.getElementById("debug").textContent =
       "hp_history = " + (localStorage.getItem("hp_history") ? "OK" : "VIDE");
   </script>
-  <script src="js/history.js"></script>
+
+  <script src="history.js"></script>
+
 </body>
 </html>
