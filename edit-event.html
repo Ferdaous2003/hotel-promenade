@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modifier un événement</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -74,7 +74,6 @@
     <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
       <button id="btnSave" class="btn-primary">Enregistrer les modifications</button>
 
-      <!--  Valider : btn-secondary + caché au départ -->
       <button id="btnValidate" class="btn-secondary" style="display:none;">
         Valider l’événement
       </button>
@@ -83,11 +82,11 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
   <script>
-     requirePerm("EDIT_EVENT", "events-list.html");
+    requirePerm("EDIT_EVENT", "events-list.html");
   </script>
 
-  <script src="js/edit-event.js"></script>
+  <script src="edit-event.js"></script>
 </body>
 </html>
