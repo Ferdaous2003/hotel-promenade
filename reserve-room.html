@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Réserver une salle</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -65,10 +65,7 @@
             <th>Salle</th>
             <th>Début</th>
             <th>Fin</th>
-
-            <!-- ✅ NOUVEAU : colonne Événement -->
             <th>Événement</th>
-
             <th>Statut</th>
             <th id="thCreatedBy">Créé par</th>
           </tr>
@@ -78,12 +75,17 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
   <script>
-     requirePerm("RESERVE_ROOM"); requirePerm("RESERVE_ROOM");
+    requirePerm("RESERVE_ROOM");
+
     const user = getUser();
     const role = user?.role;
-    const allowed = (role === "organisateur" || role === "administrateur" || role === "coordonnateur");
+    const allowed = (
+      role === "organisateur" ||
+      role === "administrateur" ||
+      role === "coordonnateur"
+    );
 
     if (!allowed) {
       alert("Accès refusé : vous n’avez pas les droits pour réserver une salle.");
@@ -91,6 +93,6 @@
     }
   </script>
 
-  <script src="js/reserve-room.js"></script>
+  <script src="reserve-room.js"></script>
 </body>
 </html>
