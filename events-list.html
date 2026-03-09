@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mes événements</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="container">
     <h1>Mes événements</h1>
 
@@ -28,11 +29,10 @@
           <th>Participants</th>
           <th>Statut</th>
           <th>Actions</th>
-           <th>Facture
-          
-          </th>
+          <th>Facture</th>
         </tr>
       </thead>
+
       <tbody id="tbody"></tbody>
     </table>
 
@@ -43,11 +43,13 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
+
   <script>
     requirePerm("VIEW_MY_EVENTS");
-
   </script>
-  <script src="js/events-list.js"></script>
+
+  <script src="events-list.js"></script>
+
 </body>
 </html>
